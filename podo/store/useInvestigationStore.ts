@@ -17,7 +17,7 @@ interface InvestigationState {
   isMobileMenuOpen: boolean;
 
   // Sidebar
-  activeSidebarTab: 'timeline' | 'records' | 'map';
+  activeSidebarTab: 'suspects' | 'timeline' | 'map';
 
   // Actions
   selectPerson: (id: string | null) => void;
@@ -27,7 +27,7 @@ interface InvestigationState {
   setLocationFilter: (loc: string | null) => void;
   openDrawer: (target: 'person' | 'record') => void;
   closeDrawer: () => void;
-  setSidebarTab: (tab: 'timeline' | 'records' | 'map') => void;
+  setSidebarTab: (tab: 'suspects' | 'timeline' | 'map') => void;
   setMobileMenuOpen: (isOpen: boolean) => void;
 }
 
@@ -39,7 +39,7 @@ export const useInvestigationStore = create<InvestigationState>((set) => ({
   activeLocationFilter: null,
   isDetailDrawerOpen: false,
   detailDrawerTarget: null,
-  activeSidebarTab: 'timeline',
+  activeSidebarTab: 'suspects',
   isMobileMenuOpen: false,
 
   selectPerson: (id) =>

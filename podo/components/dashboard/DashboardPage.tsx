@@ -64,7 +64,7 @@ export function DashboardPage() {
       {/* Main Content Area */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex">
-          {activeSidebarTab === 'timeline' ? (
+          {activeSidebarTab === 'suspects' ? (
             <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
               <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
@@ -81,7 +81,7 @@ export function DashboardPage() {
                 )}
               </div>
             </div>
-          ) : activeSidebarTab === 'records' ? (
+          ) : activeSidebarTab === 'timeline' ? (
             <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
               <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
