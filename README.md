@@ -9,7 +9,30 @@ Please fill in your information after forking this repository:
 [Add a brief description of your project here]
 
 ## Getting Started
-[Add instructions for setting up and running the project]
+
+1. **Navigate to the project directory**
+   ```bash
+   cd podo
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Environment Variables**
+   Create a `.env` file in the `podo` directory and add your Jotform API key:
+   ```env
+   API_KEY=your_jotform_api_key_here
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open the app**
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 # 🚀 Challenge Duyurusu
 
