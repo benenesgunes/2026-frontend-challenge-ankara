@@ -5,7 +5,7 @@ const API_KEY = process.env.API_KEY;
 const JOTFORM_BASE = 'https://api.jotform.com';
 
 // Whitelist of allowed form IDs
-const ALLOWED_FORM_IDS = new Set(Object.values(FORM_IDS));
+const ALLOWED_FORM_IDS: Set<string> = new Set(Object.values(FORM_IDS));
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

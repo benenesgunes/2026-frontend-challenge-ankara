@@ -39,11 +39,11 @@ export function Header() {
         </div>
 
         {/* Case badge */}
-        <div className="shrink-0">
+        {/* <div className="shrink-0">
           <span className="neo-badge bg-accent-yellow text-ink">
             Case #00421
           </span>
-        </div>
+        </div> */}
       </div>
     </header>
   );
