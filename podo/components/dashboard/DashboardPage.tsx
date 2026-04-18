@@ -64,15 +64,15 @@ export function DashboardPage() {
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex">
           {activeSidebarTab === 'timeline' ? (
-            <div className="flex-1 flex overflow-hidden">
-              <div className="flex-1 flex flex-col p-4 border-r-2 border-ink overflow-hidden">
+            <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonSuspectBoard />
                 ) : (
                   <SuspectBoard people={people} />
                 )}
               </div>
-              <div className="flex-1 flex flex-col p-4 hidden md:block overflow-hidden">
+              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (
@@ -80,24 +80,16 @@ export function DashboardPage() {
                 )}
               </div>
             </div>
-          ) : activeSidebarTab === 'people' ? (
-            <div className="flex-1 flex flex-col p-4 overflow-hidden">
-              {isLoading ? (
-                <SkeletonSuspectBoard />
-              ) : (
-                <SuspectBoard people={people} />
-              )}
-            </div>
           ) : activeSidebarTab === 'records' ? (
-            <div className="flex-1 flex overflow-hidden">
-              <div className="flex-1 flex flex-col p-4 border-r-2 border-ink overflow-hidden">
+            <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (
                   <TimelinePanel records={records} />
                 )}
               </div>
-              <div className="flex-1 flex flex-col p-4 hidden md:block overflow-hidden">
+              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (

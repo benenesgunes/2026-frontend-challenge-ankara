@@ -18,7 +18,7 @@ export function SuspectBoard({ people }: SuspectBoardProps) {
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Sticky header */}
-      <div className="flex items-center justify-between pb-3 sticky top-0 bg-bg z-10">
+      <div className="flex items-center justify-between pt-4 pb-3 sticky top-0 bg-bg z-10">
         <h2 className="text-sm">Suspect Board</h2>
         <span className="neo-label">{suspects.length} persons</span>
       </div>

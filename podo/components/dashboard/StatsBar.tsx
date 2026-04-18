@@ -60,13 +60,13 @@ export function StatsBar({ totalRecords, people, allRecords }: StatsBarProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 hide-scrollbar">
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (
           <div
             key={stat.label}
-            className={`neo-card-static p-3 flex items-start gap-3 ${
+            className={`neo-card-static p-3 flex items-start gap-3 shrink-0 w-[240px] snap-start sm:w-auto ${
               stat.accent ? 'bg-accent-red/5' : ''
             }`}
           >

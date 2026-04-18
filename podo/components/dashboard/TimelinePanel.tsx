@@ -43,13 +43,13 @@ export function TimelinePanel({ records }: TimelinePanelProps) {
   let currentLocation = '';
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-3">
+    <div className="flex flex-col h-full min-h-0">
+      <div className="flex items-center justify-between pt-4 pb-3 sticky top-0 bg-bg z-20">
         <h2 className="text-sm">Timeline</h2>
         <span className="neo-label">{sorted.length} events</span>
       </div>
 
-      <div className="relative max-h-[600px] overflow-y-auto pr-1">
+      <div className="relative flex-1 overflow-y-auto pr-1 pb-4">
         {/* Vertical connector line */}
         <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-ink/20" />
 
@@ -84,12 +84,12 @@ export function TimelinePanel({ records }: TimelinePanelProps) {
                           record.sourceType === 'sighting'
                             ? '#FF3B30'
                             : record.sourceType === 'message'
-                            ? '#0057FF'
-                            : record.sourceType === 'checkin'
-                            ? '#FFE500'
-                            : record.sourceType === 'tip'
-                            ? '#8B5CF6'
-                            : '#00C853',
+                              ? '#0057FF'
+                              : record.sourceType === 'checkin'
+                                ? '#FFE500'
+                                : record.sourceType === 'tip'
+                                  ? '#8B5CF6'
+                                  : '#00C853',
                       }}
                     />
                   </div>

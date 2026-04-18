@@ -38,7 +38,7 @@ export function RecordFeed({ records }: RecordFeedProps) {
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Sticky header */}
-      <div className="flex items-center justify-between pb-3 sticky top-0 bg-bg z-10">
+      <div className="flex items-center justify-between pt-4 pb-3 sticky top-0 bg-bg z-10">
         <h2 className="text-sm">Record Feed</h2>
         <span className="neo-label">{sorted.length} records</span>
       </div>

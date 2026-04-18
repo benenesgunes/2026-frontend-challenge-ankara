@@ -28,7 +28,7 @@ export function FilterBar() {
       </div>
 
       {/* Source filter pills */}
-      <div className="flex flex-wrap gap-1">
+      <div className="flex overflow-x-auto gap-2 pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0 hide-scrollbar">
         {ALL_SOURCES.map((source) => {
           const config = SOURCE_CONFIG[source];
           const isActive = activeSourceFilters.includes(source);
@@ -37,7 +37,7 @@ export function FilterBar() {
             <button
               key={source}
               onClick={() => toggleSourceFilter(source)}
-              className={`neo-btn text-[10px] py-1 px-2 ${
+              className={`neo-btn text-[10px] py-1 px-2 shrink-0 ${
                 isActive
                   ? `${config.badgeClass} border-ink`
                   : 'bg-surface border-ink opacity-60 hover:opacity-100'
