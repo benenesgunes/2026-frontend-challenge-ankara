@@ -1,26 +1,437 @@
 @import "tailwindcss";
 
+/* ===========================
+   NEOBRUTALISM DESIGN SYSTEM
+   Missing Podo: The Ankara Case
+   =========================== */
+
+/* --- Color Palette --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --color-bg: #F5F0E8;
+  --color-surface: #FFFDF7;
+  --color-black: #0A0A0A;
+
+  /* Accents */
+  --color-accent-yellow: #FFE500;
+  --color-accent-red: #FF3B30;
+  --color-accent-blue: #0057FF;
+  --color-accent-green: #00C853;
+  --color-accent-purple: #8B5CF6;
+
+  /* Source type colors (mapped to accents) */
+  --color-source-checkin: #FFE500;
+  --color-source-message: #0057FF;
+  --color-source-sighting: #FF3B30;
+  --color-source-note: #00C853;
+  --color-source-tip: #8B5CF6;
+
+  /* Shadows */
+  --shadow-sm: 2px 2px 0px 0px var(--color-black);
+  --shadow-md: 4px 4px 0px 0px var(--color-black);
+  --shadow-lg: 6px 6px 0px 0px var(--color-black);
+
+  /* Borders */
+  --border-width: 2px;
+  --border-color: var(--color-black);
 }
 
+/* --- Tailwind v4 Theme Tokens --- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-ink: var(--color-black);
+  --color-accent-yellow: var(--color-accent-yellow);
+  --color-accent-red: var(--color-accent-red);
+  --color-accent-blue: var(--color-accent-blue);
+  --color-accent-green: var(--color-accent-green);
+  --color-accent-purple: var(--color-accent-purple);
+
+  /* Source type colors */
+  --color-source-checkin: var(--color-source-checkin);
+  --color-source-message: var(--color-source-message);
+  --color-source-sighting: var(--color-source-sighting);
+  --color-source-note: var(--color-source-note);
+  --color-source-tip: var(--color-source-tip);
+
+  /* Fonts */
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  /* Shadows */
+  --shadow-brutal-sm: 2px 2px 0px 0px #0A0A0A;
+  --shadow-brutal-md: 4px 4px 0px 0px #0A0A0A;
+  --shadow-brutal-lg: 6px 6px 0px 0px #0A0A0A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* --- Base Styles --- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-black);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  min-height: 100vh;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Noise / grain texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-black);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+/* Monospace for data values */
+code, .font-data {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+}
+
+/* --- Neobrutalist Component Base Styles --- */
+
+/* Card */
+.neo-card {
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-black);
+  box-shadow: var(--shadow-md);
+  border-radius: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.neo-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.neo-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Interactive card (clickable) */
+.neo-card-interactive {
+  cursor: pointer;
+}
+
+.neo-card-interactive:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.neo-card-interactive:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Static card (no hover effects) */
+.neo-card-static {
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-black);
+  box-shadow: var(--shadow-md);
+  border-radius: 0;
+}
+
+/* Button */
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  border: var(--border-width) solid var(--color-black);
+  border-radius: 0;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  user-select: none;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Button variants */
+.neo-btn-primary {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-black);
+}
+
+.neo-btn-danger {
+  background-color: var(--color-accent-red);
+  color: white;
+}
+
+.neo-btn-ghost {
+  background-color: transparent;
+  color: var(--color-black);
+}
+
+.neo-btn-ghost:hover {
+  background-color: var(--color-accent-yellow);
+}
+
+/* Badge */
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: var(--border-width) solid var(--color-black);
+  border-radius: 0;
+}
+
+/* Source-type badge colors */
+.neo-badge-checkin {
+  background-color: var(--color-source-checkin);
+  color: var(--color-black);
+}
+
+.neo-badge-message {
+  background-color: var(--color-source-message);
+  color: white;
+}
+
+.neo-badge-sighting {
+  background-color: var(--color-source-sighting);
+  color: white;
+}
+
+.neo-badge-note {
+  background-color: var(--color-source-note);
+  color: var(--color-black);
+}
+
+.neo-badge-tip {
+  background-color: var(--color-source-tip);
+  color: white;
+}
+
+/* Input */
+.neo-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-black);
+  border-radius: 0;
+  outline: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.neo-input:focus {
+  box-shadow: 0 0 0 3px var(--color-accent-yellow);
+}
+
+.neo-input::placeholder {
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+/* Suspicion meter (progress bar) */
+.neo-meter {
+  width: 100%;
+  height: 0.75rem;
+  background-color: var(--color-bg);
+  border: var(--border-width) solid var(--color-black);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.neo-meter-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+/* Label style */
+.neo-label {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-black);
+  opacity: 0.6;
+}
+
+/* Stamp (for "MOST SUSPICIOUS" etc.) */
+.neo-stamp {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 3px solid;
+  border-radius: 0;
+  transform: rotate(-3deg);
+}
+
+.neo-stamp-danger {
+  color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
+  background-color: rgba(255, 59, 48, 0.08);
+}
+
+.neo-stamp-safe {
+  color: var(--color-accent-green);
+  border-color: var(--color-accent-green);
+  background-color: rgba(0, 200, 83, 0.08);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-black);
+  border: 1px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-black);
+}
+
+/* --- Utility Classes --- */
+
+/* Divider line */
+.neo-divider {
+  border: none;
+  border-top: var(--border-width) solid var(--color-black);
+  margin: 1rem 0;
+}
+
+/* Dot separator for inline items */
+.neo-dot::before {
+  content: "•";
+  margin: 0 0.5rem;
+  color: var(--color-black);
+  opacity: 0.4;
+}
+
+/* Animate-in for cards */
+@keyframes neo-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.neo-animate-in {
+  animation: neo-slide-up 0.3s ease forwards;
+}
+
+/* Drawer slide-in */
+@keyframes neo-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes neo-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.neo-drawer-enter {
+  animation: neo-slide-in-right 0.25s ease forwards;
+}
+
+.neo-overlay-enter {
+  animation: neo-fade-in 0.2s ease forwards;
+}
+
+/* Loading block animation (brutalist spinner) */
+@keyframes neo-pulse-block {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+}
+
+.neo-loading-block {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-black);
+  border: var(--border-width) solid var(--color-black);
+  animation: neo-pulse-block 0.8s ease-in-out infinite;
 }
