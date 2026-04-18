@@ -17,7 +17,7 @@ interface InvestigationState {
   isMobileMenuOpen: boolean;
 
   // Sidebar
-  activeSidebarTab: 'timeline' | 'records';
+  activeSidebarTab: 'timeline' | 'records' | 'map';
 
   // Actions
   selectPerson: (id: string | null) => void;
@@ -27,7 +27,7 @@ interface InvestigationState {
   setLocationFilter: (loc: string | null) => void;
   openDrawer: (target: 'person' | 'record') => void;
   closeDrawer: () => void;
-  setSidebarTab: (tab: 'timeline' | 'records') => void;
+  setSidebarTab: (tab: 'timeline' | 'records' | 'map') => void;
   setMobileMenuOpen: (isOpen: boolean) => void;
 }
 

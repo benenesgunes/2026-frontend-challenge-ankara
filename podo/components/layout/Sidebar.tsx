@@ -1,17 +1,18 @@
 'use client';
 
-import { Clock, Users, FileText, X } from 'lucide-react';
+import { Clock, Users, FileText, X, Map as MapIcon } from 'lucide-react';
 import { useInvestigationStore } from '@/store/useInvestigationStore';
 
 const TABS = [
   { id: 'timeline' as const, label: 'Timeline', icon: Clock },
   { id: 'records' as const, label: 'Records', icon: FileText },
+  { id: 'map' as const, label: 'Map', icon: MapIcon },
 ];
 
 export function Sidebar() {
   const { activeSidebarTab, setSidebarTab, isMobileMenuOpen, setMobileMenuOpen } = useInvestigationStore();
 
-  const handleTabClick = (tabId: 'timeline' | 'records') => {
+  const handleTabClick = (tabId: 'timeline' | 'records' | 'map') => {
     setSidebarTab(tabId);
     setMobileMenuOpen(false);
   };

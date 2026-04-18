@@ -9,11 +9,15 @@ interface RecordFeedProps {
 }
 
 export function RecordFeed({ records }: RecordFeedProps) {
-  const { selectedRecordId, selectRecord, searchQuery, activeSourceFilters } =
+  const { selectedRecordId, selectRecord, searchQuery, activeSourceFilters, activeLocationFilter } =
     useInvestigationStore();
 
   // Apply filters
   let filtered = records;
+
+  if (activeLocationFilter) {
+    filtered = filtered.filter((r) => r.location === activeLocationFilter);
+  }
 
   if (activeSourceFilters.length > 0) {
     filtered = filtered.filter((r) => activeSourceFilters.includes(r.sourceType));
