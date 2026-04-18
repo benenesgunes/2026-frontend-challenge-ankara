@@ -6,7 +6,33 @@ Please fill in your information after forking this repository:
 - **Name**: Enes Güneş
 
 ## Project Description
-[Add a brief description of your project here]
+This repository contains a frontend application built for the Jotform 2026 Frontend Challenge.
+
+The app is a Next.js (App Router) TypeScript project that demonstrates a dashboard-style interface for investigating records and people. It focuses on a compact, component-driven UI and includes features such as:
+
+- Interactive dashboard with record feed and statistics
+- Map view for locating records and people
+- Person and record detail pages with linked data
+- Filtering and timeline panels for investigation workflows
+- A simple local store and hooks for fetching and linking records
+
+Key folders:
+
+- `app/` — Next.js application entry and routes
+- `app/components/` — UI components organized by feature (dashboard, map, people, records, ui)
+- `hooks/` — custom hooks (e.g., `useRecords`)
+- `lib/` — utility modules (API helpers, scoring/linking logic)
+- `store/` — types and lightweight investigation store
+
+Run locally from the `podo` directory:
+
+```bash
+cd podo
+npm install
+npm run dev
+```
+
+Open http://localhost:3000 to view the app.
 
 ## Getting Started
 
