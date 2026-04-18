@@ -2,6 +2,7 @@ import type { Person } from '@/store/types';
 import { SuspicionMeter } from './SuspicionMeter';
 import { SourceBadge } from '../records/SourceBadge';
 import { MapPin, Clock, X } from 'lucide-react';
+import { useInvestigationStore } from '@/store/useInvestigationStore';
 
 interface PersonDetailProps {
   person: Person;
@@ -19,6 +20,8 @@ function formatDate(timestamp: string): string {
 }
 
 export function PersonDetail({ person, onClose }: PersonDetailProps) {
+  const { selectRecord } = useInvestigationStore();
+  
   const sortedRecords = [...person.linkedRecords].sort(
     (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
   );
@@ -71,9 +74,10 @@ export function PersonDetail({ person, onClose }: PersonDetailProps) {
         <span className="neo-label block mb-3">Record Timeline</span>
         <div className="space-y-3">
           {sortedRecords.map((record) => (
-            <div
+            <button
               key={record.id}
-              className="neo-card-static p-3 text-xs"
+              onClick={() => selectRecord(record.id)}
+              className="neo-card neo-card-interactive w-full text-left p-3 text-xs neo-animate-in block"
             >
               <div className="flex items-center justify-between mb-1">
                 <SourceBadge sourceType={record.sourceType} />
@@ -90,7 +94,7 @@ export function PersonDetail({ person, onClose }: PersonDetailProps) {
                   </span>
                 </div>
               )}
-            </div>
+            </button>
           ))}
         </div>
       </div>

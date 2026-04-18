@@ -1,6 +1,7 @@
 import type { AnyRecord } from '@/store/types';
 import { SourceBadge } from './SourceBadge';
 import { MapPin, Clock, X, User, AlertTriangle } from 'lucide-react';
+import { useInvestigationStore } from '@/store/useInvestigationStore';
 
 interface RecordDetailProps {
   record: AnyRecord;
@@ -24,6 +25,8 @@ function formatFullDate(timestamp: string): string {
 }
 
 export function RecordDetail({ record, onClose }: RecordDetailProps) {
+  const { selectPerson } = useInvestigationStore();
+
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
@@ -134,9 +137,13 @@ export function RecordDetail({ record, onClose }: RecordDetailProps) {
             <span className="neo-label block mb-2">Related Persons</span>
             <div className="flex flex-wrap gap-1">
               {record.relatedPersons.map((name) => (
-                <span key={name} className="neo-badge bg-surface">
+                <button 
+                  key={name}
+                  onClick={() => selectPerson(name.toLowerCase().trim())}
+                  className="neo-badge bg-surface hover:bg-bg hover:shadow-neo transition-all cursor-pointer"
+                >
                   {name}
-                </span>
+                </button>
               ))}
             </div>
           </div>

@@ -100,7 +100,7 @@ export function DashboardPage() {
             </div>
           ) : activeSidebarTab === 'map' ? (
             <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
-              <div className="flex-[3] flex flex-col p-0 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink bg-surface relative">
+              <div className="flex-[3] flex flex-col p-0 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[350px] md:min-h-0 shrink-0 md:shrink bg-surface relative">
                 {isLoading ? (
                   <div className="w-full h-full animate-pulse opacity-50" />
                 ) : (
