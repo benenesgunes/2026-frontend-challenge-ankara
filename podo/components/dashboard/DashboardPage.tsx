@@ -1,8 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
-import { allRecords } from '@/lib/placeholderData';
-import { linkRecordsToPeople } from '@/lib/recordLinker';
+import { useRecords } from '@/hooks/useRecords';
 import { useInvestigationStore } from '@/store/useInvestigationStore';
 import { StatsBar } from './StatsBar';
 import { SuspectBoard } from './SuspectBoard';
@@ -12,34 +10,50 @@ import { FilterBar } from '../filters/FilterBar';
 import { Drawer } from '../ui/Drawer';
 import { PersonDetail } from '../people/PersonDetail';
 import { RecordDetail } from '../records/RecordDetail';
+import { ErrorBanner } from '../ui/ErrorBanner';
+import {
+  SkeletonStatsBar,
+  SkeletonSuspectBoard,
+  SkeletonRecordFeed,
+} from '../ui/Skeletons';
 
 export function DashboardPage() {
   const {
     activeSidebarTab,
-    isDetailDrawerOpen,
     detailDrawerTarget,
     selectedPersonId,
     selectedRecordId,
     closeDrawer,
   } = useInvestigationStore();
 
-  // Compute people from records
-  const people = useMemo(() => linkRecordsToPeople(allRecords), []);
+  // Fetch real data from Jotform API
+  const { records, people, isLoading, error, refetch } = useRecords();
 
   // Find selected person/record
   const selectedPerson = people.find((p) => p.id === selectedPersonId);
-  const selectedRecord = allRecords.find((r) => r.id === selectedRecordId);
+  const selectedRecord = records.find((r) => r.id === selectedRecordId);
 
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Stats Bar */}
       <div className="p-4 border-b-2 border-ink">
-        <StatsBar
-          totalRecords={allRecords.length}
-          people={people}
-          allRecords={allRecords}
-        />
+        {isLoading ? (
+          <SkeletonStatsBar />
+        ) : (
+          <StatsBar
+            totalRecords={records.length}
+            people={people}
+            allRecords={records}
+          />
+        )}
       </div>
+
+      {/* Error Banner */}
+      {error && (
+        <div className="p-4 border-b-2 border-ink">
+          <ErrorBanner message={error} onRetry={refetch} />
+        </div>
+      )}
 
       {/* Filter Bar */}
       <div className="p-4 border-b-2 border-ink bg-surface/50">
@@ -49,31 +63,46 @@ export function DashboardPage() {
       {/* Main Content Area */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex">
-          {/* Left Panel — switches between Timeline, People list, Records list */}
           {activeSidebarTab === 'timeline' ? (
-            // Timeline + Suspect Board layout
             <div className="flex-1 flex overflow-hidden">
-              {/* Suspect Board */}
               <div className="flex-1 flex flex-col p-4 border-r-2 border-ink overflow-hidden">
-                <SuspectBoard people={people} />
+                {isLoading ? (
+                  <SkeletonSuspectBoard />
+                ) : (
+                  <SuspectBoard people={people} />
+                )}
               </div>
-
-              {/* Record Feed */}
               <div className="flex-1 flex flex-col p-4 hidden md:block overflow-hidden">
-                <RecordFeed records={allRecords} />
+                {isLoading ? (
+                  <SkeletonRecordFeed />
+                ) : (
+                  <RecordFeed records={records} />
+                )}
               </div>
             </div>
           ) : activeSidebarTab === 'people' ? (
             <div className="flex-1 flex flex-col p-4 overflow-hidden">
-              <SuspectBoard people={people} />
+              {isLoading ? (
+                <SkeletonSuspectBoard />
+              ) : (
+                <SuspectBoard people={people} />
+              )}
             </div>
           ) : activeSidebarTab === 'records' ? (
             <div className="flex-1 flex overflow-hidden">
               <div className="flex-1 flex flex-col p-4 border-r-2 border-ink overflow-hidden">
-                <TimelinePanel records={allRecords} />
+                {isLoading ? (
+                  <SkeletonRecordFeed />
+                ) : (
+                  <TimelinePanel records={records} />
+                )}
               </div>
               <div className="flex-1 flex flex-col p-4 hidden md:block overflow-hidden">
-                <RecordFeed records={allRecords} />
+                {isLoading ? (
+                  <SkeletonRecordFeed />
+                ) : (
+                  <RecordFeed records={records} />
+                )}
               </div>
             </div>
           ) : null}
