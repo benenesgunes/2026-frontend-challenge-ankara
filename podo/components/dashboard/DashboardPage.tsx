@@ -66,14 +66,14 @@ export function DashboardPage() {
         <div className="h-full flex">
           {activeSidebarTab === 'suspects' ? (
             <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
-              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
+              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[350px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonSuspectBoard />
                 ) : (
                   <SuspectBoard people={people} />
                 )}
               </div>
-              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
+              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[350px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (
@@ -83,14 +83,14 @@ export function DashboardPage() {
             </div>
           ) : activeSidebarTab === 'timeline' ? (
             <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
-              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
+              <div className="flex-1 flex flex-col px-4 pb-4 border-b-2 md:border-b-0 md:border-r-2 border-ink md:overflow-hidden min-h-[350px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (
                   <TimelinePanel records={records} />
                 )}
               </div>
-              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[500px] md:min-h-0 shrink-0 md:shrink">
+              <div className="flex-1 flex flex-col px-4 pb-4 md:overflow-hidden min-h-[350px] md:min-h-0 shrink-0 md:shrink">
                 {isLoading ? (
                   <SkeletonRecordFeed />
                 ) : (
